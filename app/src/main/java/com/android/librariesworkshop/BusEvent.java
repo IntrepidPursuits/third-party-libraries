@@ -4,17 +4,8 @@ import retrofit.RetrofitError;
 
 public class BusEvent {
 
-    public static class MyEvent extends BusEvent {
-        private ResponseModel response;
+    //TODO: Add an event that will be your argument in an Otto post
 
-        public MyEvent(ResponseModel response) {
-            this.response = response;
-        }
-
-        public ResponseModel getResponse() {
-            return response;
-        }
-    }
 
     public static class RetrofitFailureEvent extends BusEvent {
         private RetrofitError error;

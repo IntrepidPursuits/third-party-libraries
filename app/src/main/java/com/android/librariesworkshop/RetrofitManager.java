@@ -7,7 +7,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
-import retrofit.http.POST;
 import retrofit.http.Query;
 import timber.log.Timber;
 
@@ -28,31 +27,21 @@ public class RetrofitManager {
             .setLogLevel(RestAdapter.LogLevel.FULL)
             .build();
 
-    //TODO: Service
-
     private static MyService MY_SERVICE = ADAPTER.create(MyService.class);
 
     public static MyService getService() {
         return MY_SERVICE;
     }
 
-    //TODO: Interface
-
     public interface MyService {
 
-        //TODO: Make HTTP GET call to server, with a single query parameter
-
-        //TODO: Make HTTP POST call to server, with 3 parameters
-
-        /** look at {@link com.android.librariesworkshop.ResponseModel}
-         */
-
-        //TODO: Figure these out
         @GET("/entry")
         void getSomething(@Query("id") int id, Callback<ResponseModel> callback);
 
-        @POST("/entry/add")
-        void postSomething(@Query("first_name") String first, @Query("last_name") String last, @Query("age") int age, Callback<ResponseModel> callback);
+        //TODO: Make HTTP POST call to server, with 3 parameters
+        /** look at {@link com.android.librariesworkshop.ResponseModel} for information on variables
+         *
+         */
     }
 
 }

@@ -6,53 +6,41 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.librariesworkshop.BusEvent;
 import com.android.librariesworkshop.R;
 import com.android.librariesworkshop.ResponseModel;
 import com.android.librariesworkshop.RetrofitManager;
 import com.android.librariesworkshop.application.WorkshopApplication;
-import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
-import butterknife.OnEditorAction;
-import butterknife.OnPageChange;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class MainActivity extends ActionBarActivity {
 
-    //TODO: More ButterKnife
     @InjectView(R.id.id_num)
     EditText idNumber;
 
     @InjectViews({R.id.first_name, R.id.last_name, R.id.age})
     List<EditText> entryFields;
 
-    @InjectView(R.id.text_1)
-    TextView response;
+    //TODO: Inject the TextView R.id.text_1, which displays the server response
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ButterKnife.inject(this);
-
         WorkshopApplication.bus.register(this);
     }
 
-    //TODO: Add OnClick handler, add server call
     @OnClick(R.id.get_button)
     void makeServerCall() {
         String s = String.valueOf(idNumber.getText());
@@ -62,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
             RetrofitManager.getService().getSomething(id, new Callback<ResponseModel>() {
                 @Override
                 public void success(ResponseModel responseModel, Response response) {
-                    WorkshopApplication.bus.post(new BusEvent.MyEvent(responseModel));
+                    //TODO: Post an event that links w/the Subscribe method below (you need to add that as well)
                 }
 
                 @Override
@@ -84,29 +72,15 @@ public class MainActivity extends ActionBarActivity {
         /** {@link com.android.librariesworkshop.RetrofitManager}
          */
 
-        if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && age > 0) {
-            RetrofitManager.getService().postSomething(firstName, lastName, age, new Callback<ResponseModel>() {
-                @Override
-                public void success(ResponseModel responseModel, Response response) {
-                    WorkshopApplication.bus.post(new BusEvent.MyEvent(responseModel));
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    WorkshopApplication.bus.post(new BusEvent.RetrofitFailureEvent(error));
-                }
-            });
-        } else {
-            Toast.makeText(this, "All fields must be filled out!", Toast.LENGTH_SHORT).show();
-        }
     }
 
-    @Subscribe
-    public void response(BusEvent.MyEvent event) {
-        Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
+    //TODO: Add a Subscribe method to display the response of your HTTP POST call
 
-        ResponseModel.User user = event.getResponse().getUser();
-        response.setText("First: " + user.getFirstName() + "\nLast: " + user.getLastName() + "\nAge: " + user.getAge());
+
+    @Override
+    protected void onPause() {
+        WorkshopApplication.bus.unregister(this);
+        super.onPause();
     }
 
     @Override
