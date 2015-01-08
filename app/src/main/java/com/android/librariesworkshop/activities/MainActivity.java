@@ -92,6 +92,12 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        WorkshopApplication.bus.unregister(this);
+        super.onPause();
+    }
+
     @Subscribe
     public void response(BusEvent.MyEvent event) {
         Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
