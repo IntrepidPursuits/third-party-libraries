@@ -14,7 +14,6 @@ import timber.log.Timber;
 
 public class WorkshopApplication extends Application {
 
-    //TODO: Create Otto Bus
     public static Bus bus;
 
     public static GlobalOttoListener globalOttoListener;

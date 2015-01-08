@@ -28,26 +28,14 @@ public class RetrofitManager {
             .setLogLevel(RestAdapter.LogLevel.FULL)
             .build();
 
-    //TODO: Service
-
     private static MyService MY_SERVICE = ADAPTER.create(MyService.class);
 
     public static MyService getService() {
         return MY_SERVICE;
     }
 
-    //TODO: Interface
-
     public interface MyService {
 
-        //TODO: Make HTTP GET call to server, with a single query parameter
-
-        //TODO: Make HTTP POST call to server, with 3 parameters
-
-        /** look at {@link com.android.librariesworkshop.ResponseModel}
-         */
-
-        //TODO: Figure these out
         @GET("/entry")
         void getSomething(@Query("id") int id, Callback<ResponseModel> callback);
 

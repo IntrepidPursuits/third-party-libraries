@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,15 +23,12 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
-import butterknife.OnEditorAction;
-import butterknife.OnPageChange;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class MainActivity extends ActionBarActivity {
 
-    //TODO: More ButterKnife
     @InjectView(R.id.id_num)
     EditText idNumber;
 
@@ -52,7 +48,6 @@ public class MainActivity extends ActionBarActivity {
         WorkshopApplication.bus.register(this);
     }
 
-    //TODO: Add OnClick handler, add server call
     @OnClick(R.id.get_button)
     void makeServerCall() {
         String s = String.valueOf(idNumber.getText());
@@ -79,10 +74,6 @@ public class MainActivity extends ActionBarActivity {
         String lastName = String.valueOf(entryFields.get(1).getText());
         String s = String.valueOf(entryFields.get(2).getText());
         int age = TextUtils.isEmpty(s) ? 0 : Integer.parseInt(s);
-
-        //TODO: call your retrofit post method
-        /** {@link com.android.librariesworkshop.RetrofitManager}
-         */
 
         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && age > 0) {
             RetrofitManager.getService().postSomething(firstName, lastName, age, new Callback<ResponseModel>() {
