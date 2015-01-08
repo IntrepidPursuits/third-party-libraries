@@ -38,7 +38,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        WorkshopApplication.bus.register(this);
     }
 
     @OnClick(R.id.get_button)
