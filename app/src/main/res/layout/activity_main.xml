@@ -10,10 +10,19 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/id_num"
+        android:id="@+id/first_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="ID"
+        android:layout_marginTop="20dp"
+        android:hint="First"
+        android:inputType="numberDecimal"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/last_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last"
         android:inputType="numberDecimal"
         android:padding="10dp" />
 
@@ -23,37 +32,6 @@
         android:layout_height="50dp"
         android:text="GET" />
 
-    <EditText
-        android:id="@+id/first_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="First"
-        android:inputType="text"
-        android:padding="10dp" />
-
-    <EditText
-        android:id="@+id/last_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Last"
-        android:inputType="text"
-        android:padding="10dp" />
-
-    <EditText
-        android:id="@+id/age"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Age"
-        android:inputType="numberDecimal"
-        android:padding="10dp" />
-
-    <Button
-        android:id="@+id/post_button"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="POST" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,11 +39,18 @@
         android:padding="10dp"
         android:text="Response:" />
 
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/grey"/>
+
     <TextView
         android:id="@+id/text_1"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal|bottom"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textSize="18sp" />
 
 </LinearLayout>

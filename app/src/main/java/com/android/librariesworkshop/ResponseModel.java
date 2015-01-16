@@ -1,7 +1,5 @@
 package com.android.librariesworkshop;
 
-import com.google.gson.annotations.SerializedName;
-
 public class ResponseModel {
 
     private boolean success;
@@ -25,11 +23,11 @@ public class ResponseModel {
 
     public class User {
         private int id;
-        @SerializedName("first_name")
+
         private String firstName;
-        @SerializedName("last_name")
         private String lastName;
         private int age;
+        private String avatarUrl;
 
         public int getId() {
             return id;
@@ -45,6 +43,10 @@ public class ResponseModel {
 
         public int getAge() {
             return age;
+        }
+
+        public String getAvatarUrl() {
+            return avatarUrl;
         }
     }
 

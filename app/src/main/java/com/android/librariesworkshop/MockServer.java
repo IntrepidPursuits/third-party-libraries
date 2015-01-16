@@ -25,27 +25,23 @@ public class MockServer implements Client {
         String path = uri.getPath();
         int responseCode = 200;
 
-        if (path.contains("/add")) {
+        if (path.contains("/entry")) {
             try {
                 String id = uri.getQueryParameter("id");
                 String firstName = uri.getQueryParameter("first_name");
                 String lastName = uri.getQueryParameter("last_name");
-                String age = uri.getQueryParameter("age");
-
-                responseString = CannedResponses.getResponse(id, firstName, lastName, age);
-            } catch (Exception e) {
-                responseString = CannedResponses.FAILED;
-            }
-        } else if (path.contains("/entry")) {
-            try {
-                String id = uri.getQueryParameter("id");
-
-                responseString = CannedResponses.getResponse(id, "Bill", "Jones", "24");
+                responseString = CannedResponses.getResponse(id, firstName, lastName, "35");
             } catch (Exception e) {
                 responseString = CannedResponses.FAILED;
             }
         } else {
             responseCode = 400;
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Timber.e(e, "oops");
         }
 
         List<Header> headers = new ArrayList<Header>();
@@ -59,7 +55,7 @@ public class MockServer implements Client {
         public static String FAILED = "{\"success\"=false,\"message\"=\"invalid parameters\"}";
 
         public static String getResponse(String id, String firstName, String lastName, String age) {
-            return "{\"success\"=true,\"message\"=\"entry found\",\"user\"={\"id\"=" + id + ",\"first_name\"=\"" + firstName + "\",\"last_name\"=" + lastName + ",\"age\"=" + age + "}}";
+            return "{\"success\"=true,\"message\"=\"entry found\",\"user\"={\"id\"=" + id + ",\"first_name\"=\"" + firstName + "\",\"last_name\"=" + lastName + ",\"age\"=" + age + ",\"avatar_url\"=\"http://wallpaperscraft.com/image/16591/256x256.jpg\"}}";
         }
 
     }

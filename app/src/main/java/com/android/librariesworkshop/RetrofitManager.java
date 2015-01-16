@@ -7,7 +7,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
-import retrofit.http.POST;
 import retrofit.http.Query;
 import timber.log.Timber;
 
@@ -37,10 +36,7 @@ public class RetrofitManager {
     public interface MyService {
 
         @GET("/entry")
-        void getSomething(@Query("id") int id, Callback<ResponseModel> callback);
-
-        @POST("/entry/add")
-        void postSomething(@Query("first_name") String first, @Query("last_name") String last, @Query("age") int age, Callback<ResponseModel> callback);
+        void getUserInfo(@Query("first_name") String first, @Query("last_name") String last, Callback<ResponseModel> callback);
     }
 
 }
