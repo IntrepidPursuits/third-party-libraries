@@ -5,10 +5,10 @@ import com.google.gson.GsonBuilder;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
+import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Query;
+import retrofit.http.Headers;
 import timber.log.Timber;
 
 public class RetrofitManager {
@@ -16,7 +16,7 @@ public class RetrofitManager {
     private static final Gson gson = new GsonBuilder().create();
 
     private static RestAdapter ADAPTER = new RestAdapter.Builder()
-            .setEndpoint("http://mockserver.com")
+            .setEndpoint("http://www.mbta.com/uploadedfiles")
             .setConverter(new GsonConverter(gson))
             .setLog(new RestAdapter.Log() {
                 @Override
@@ -24,8 +24,7 @@ public class RetrofitManager {
                     Timber.d(message);
                 }
             })
-            .setClient(new MockServer())
-            .setLogLevel(RestAdapter.LogLevel.FULL)
+            .setLogLevel(RestAdapter.LogLevel.NONE)
             .build();
 
     private static MyService MY_SERVICE = ADAPTER.create(MyService.class);
@@ -36,11 +35,18 @@ public class RetrofitManager {
 
     public interface MyService {
 
-        @GET("/entry")
-        void getSomething(@Query("id") int id, Callback<ResponseModel> callback);
+//        @GET("/entry")
+//        void getSomething(@Query("id") int id, Callback<ResponseModel> callback);
 
-        @POST("/entry/add")
-        void postSomething(@Query("first_name") String first, @Query("last_name") String last, @Query("age") int age, Callback<ResponseModel> callback);
+//        @POST("/entry/add")
+//        void postSomething(@Query("first_name") String first, @Query("last_name") String last, @Query("age") int age, Callback<ResponseModel> callback);
+
+        @Headers({"Content-Type: text/plain"})
+        @GET("/feed_info.txt")
+        void getUpdateDate(Callback<Response> callback);
+
+        @GET("/MBTA_GTFS.zip")
+        void getGtfsFile(Callback<Response> callback);
     }
 
 }
